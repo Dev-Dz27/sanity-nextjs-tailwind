@@ -1,38 +1,47 @@
 import React from 'react'
+import { urlFor } from '../lib/client'
+import Link from 'next/link'
+import Image from 'next/image';
 
 const ProductSwape = ({product}) => {
+  const { images, name, details, price } = product;
+  console.log(product)
   return (
     <>
         
-        <a href="#" class="block overflow-hidden group">
-  <div class="relative h-[350px] sm:h-[450px]">
-    <img
-      src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-      alt=""
-      class="absolute inset-0 object-cover w-full h-full opacity-100 group-hover:opacity-0"
-    />
+        <Link href={`/product/${product.slug.current}`} class="block overflow-hidden group">
+          <div
+            class="relative h-[350px] sm:h-[450px]">
 
-    <img
-      src="https://images.unsplash.com/photo-1523381140794-a1eef18a37c7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwcm9maWxlLXBhZ2V8MjQ2fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60"
-      alt=""
-      class="absolute inset-0 object-cover w-full h-full opacity-0 group-hover:opacity-100"
-    />
-  </div>
+              <img
+              src={urlFor(images[0])}    
+              alt="product"
+              class="absolute inset-0 object-cover w-full h-full opacity-100 group-hover:opacity-0 transition"
+              />
+              <img
+              src={urlFor(images[1])}    
+              alt="product"
+              class="absolute inset-0 object-cover w-full h-full opacity-0 group-hover:opacity-100 transition"              />
+            
+      
 
-  <div class="relative pt-3 bg-white">
+
+      </div>
+
+  <div class="relative pt-3 bg-white text-center">
     <h3
       class="text-xs text-gray-700 group-hover:underline group-hover:underline-offset-4"
     >
-      {product.name} Basic Tee
+      {name}
     </h3>
 
     <p class="mt-2">
-      <span class="sr-only"> {product.name}Regular Price </span>
+      <span class="sr-only"> {name} </span>
 
-      <span class="tracking-wider text-gray-900"> £24.00 GBP </span>
+      <span class="tracking-wider text-gray-900"> {price}  </span>
     </p>
   </div>
-</a>
+</Link>
 
 
 

@@ -6,7 +6,8 @@ import { client, urlFor } from "../lib/client";
 // import { useStateContext } from '../../context/StateContext';
 
 const ProductDetails = ({ product, products }) => {
-  const { images, sizes, colors, name, details, price } = product;
+  console.log(product.categories)
+  const { images, sizes, colors, name, details, price, description, categories } = product;
   const [index, setIndex] = useState(0);
   const { decQty, incQty, qty, onAdd, setShowCart } = useState(1);
 
@@ -44,44 +45,42 @@ const ProductDetails = ({ product, products }) => {
   return (
     <div>
       <section>
-        <div class="relative max-w-screen-xl px-4 py-8 mx-auto">
-          <div class="grid items-start grid-cols-1 gap-8 md:grid-cols-2">
-            <div class="grid grid-cols-2 gap-4 md:grid-cols-1 ">
+        <div className="relative max-w-screen-xl px-4 py-8 mx-auto">
+          <div className="grid items-start grid-cols-1 gap-8 md:grid-cols-2">
+            <div className="grid grid-cols-2 gap-4 md:grid-cols-1 ">
               <img
                 alt="Les Paul"
                 src={urlFor(images[0])}
-                class="object-cover w-full aspect-square rounded-xl"
+                className="object-cover w-full aspect-square rounded-xl"
               />
 
-              <div class="grid grid-cols-2 gap-4 lg:mt-4">
+              <div className="grid grid-cols-2 gap-4 lg:mt-4">
                 {imagesWithoutFirst?.map((image, i) => (
                   <img
                     key={i}
                     alt="Les Paul"
                     src={urlFor(image)}
-                    class="object-cover w-full aspect-square rounded-xl"
+                    className="object-cover w-full aspect-square rounded-xl"
                   />
                 ))}
               </div>
             </div>
 
-            <div class="sticky top-0">
-              <strong class="rounded-full border border-blue-600 bg-gray-100 px-3 py-0.5 text-xs font-medium tracking-wide text-blue-600">
-                categorie
+            <div className="sticky top-0">
+              <strong className="rounded-full border border-blue-600 bg-gray-100 px-3 py-0.5 text-xs font-medium tracking-wide text-blue-600">
+                {categories[0].name}
               </strong>
 
-              <div class="flex justify-between mt-8">
-                <div class="max-w-[35ch]">
-                  <p class="mt-0.5 text-sm">categorie</p>
+              <div className="flex justify-between mt-8">
+                <div className="max-w-[35ch]">
+                  <p className="mt-0.5 text-sm"> {categories[0].name}</p>
 
-                  <h1 class="text-2xl font-bold">
-                    Fun Product That Does Something Cool
-                  </h1>
-                  <p class="text-xl font-bold">{price}$</p>
+                  <h1 className="text-2xl font-bold">{name}</h1>
+                  <p className="text-xl">{price}£</p>
 
-                  <div class="mt-2 -ml-0.5 flex">
+                  <div className="mt-2 -ml-0.5 flex">
                     <svg
-                      class="w-5 h-5 text-yellow-400"
+                      className="w-5 h-5 text-yellow-400"
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 20 20"
                       fill="currentColor"
@@ -90,7 +89,7 @@ const ProductDetails = ({ product, products }) => {
                     </svg>
 
                     <svg
-                      class="w-5 h-5 text-yellow-400"
+                      className="w-5 h-5 text-yellow-400"
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 20 20"
                       fill="currentColor"
@@ -99,7 +98,7 @@ const ProductDetails = ({ product, products }) => {
                     </svg>
 
                     <svg
-                      class="w-5 h-5 text-yellow-400"
+                      className="w-5 h-5 text-yellow-400"
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 20 20"
                       fill="currentColor"
@@ -108,7 +107,7 @@ const ProductDetails = ({ product, products }) => {
                     </svg>
 
                     <svg
-                      class="w-5 h-5 text-yellow-400"
+                      className="w-5 h-5 text-yellow-400"
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 20 20"
                       fill="currentColor"
@@ -117,7 +116,7 @@ const ProductDetails = ({ product, products }) => {
                     </svg>
 
                     <svg
-                      class="w-5 h-5 text-gray-200"
+                      className="w-5 h-5 text-gray-200"
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 20 20"
                       fill="currentColor"
@@ -126,29 +125,25 @@ const ProductDetails = ({ product, products }) => {
                     </svg>
                   </div>
                 </div>
-
-                <p class="text-lg font-bold">{price}$</p>
               </div>
 
-              <details class="group relative mt-4 [&_summary::-webkit-details-marker]:hidden">
-                <summary class="block">
+              <div className="prose max-w-none group-open:hidden mt-4">
+                <p>{description}</p>
+              </div>
+              {/* <details className="group relative mt-4 [&_summary::-webkit-details-marker]:hidden">
+                <summary className="block">
                   <div>
-                    <div class="prose max-w-none group-open:hidden">
-                      <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Ipsa veniam dicta beatae eos ex error culpa delectus rem
-                        tenetur, architecto quam nesciunt, dolor veritatis nisi
-                        minus inventore, rerum at recusandae?
-                      </p>
+                    <div className="prose max-w-none group-open:hidden">
+                      <p>{description}</p>
                     </div>
 
-                    <span class="mt-4 text-sm font-medium underline cursor-pointer group-open:absolute group-open:bottom-0 group-open:left-0 group-open:mt-0">
+                    <span className="mt-4 text-sm font-medium underline cursor-pointer group-open:absolute group-open:bottom-0 group-open:left-0 group-open:mt-0">
                       Read More
                     </span>
                   </div>
                 </summary>
 
-                <div class="pb-6 prose max-w-none">
+                <div className="pb-6 prose max-w-none">
                   <p>
                     Lorem ipsum dolor sit amet consectetur adipisicing elit.
                     Ipsa veniam dicta beatae eos ex error culpa delectus rem
@@ -163,28 +158,29 @@ const ProductDetails = ({ product, products }) => {
                     non! Maxime et quisquam amet. A, deserunt!
                   </p>
                 </div>
-              </details>
+              </details> */}
 
-              <form class="mt-8">
+              <form className="mt-8">
                 <fieldset>
-                  <legend class="mb-1 text-sm font-medium">Color</legend>
+                  <legend className="mb-1 text-sm font-medium">Color</legend>
 
-                  <div class="flow-root">
-                    <div class="-m-0.5 flex flex-wrap">
+                  <div className="flow-root">
+                    <div className="-m-0.5 flex flex-wrap">
                       {colors?.map((color, i) => (
                         <label
                           key={i}
-                          for={`color${color}`}
-                          class="cursor-pointer p-0.5"
+                          // Was for and changed to htmlFor bcz of console error
+                          htmlFor={`color${color}`}
+                          className="cursor-pointer p-0.5"
                         >
                           <input
                             type="radio"
                             name="color"
                             id={`color${color}`}
-                            class="sr-only peer"
+                            className="sr-only peer"
                           />
 
-                          <span class="inline-block px-3 py-1 text-xs font-medium border rounded-full group peer-checked:bg-black peer-checked:text-white">
+                          <span className="inline-block px-3 py-1 text-xs font-medium border rounded-full group peer-checked:bg-black peer-checked:text-white">
                             {color}
                           </span>
                         </label>
@@ -193,25 +189,26 @@ const ProductDetails = ({ product, products }) => {
                   </div>
                 </fieldset>
                 {/* Sizes */}
-                <fieldset class="mt-4">
-                  <legend class="mb-1 text-sm font-medium">Size</legend>
+                <fieldset className="mt-4">
+                  <legend className="mb-1 text-sm font-medium">Size</legend>
 
-                  <div class="flow-root">
-                    <div class="-m-0.5 flex flex-wrap">
+                  <div className="flow-root">
+                    <div className="-m-0.5 flex flex-wrap">
                       {sizes?.map((size, i) => (
                         <label
                           key={i}
-                          for={`size_${size}`}
-                          class="cursor-pointer p-0.5"
+                          // Was for and changed to htmlFor bcz of console error
+                          htmlFor={`size_${size}`}
+                          className="cursor-pointer p-0.5"
                         >
                           <input
                             type="radio"
                             name="size"
                             id={`size_${size}`}
-                            class="sr-only peer"
+                            className="sr-only peer"
                           />
 
-                          <span class="inline-flex items-center justify-center w-8 h-8 text-xs font-medium border rounded-full group peer-checked:bg-black peer-checked:text-white">
+                          <span className="inline-flex items-center justify-center w-8 h-8 text-xs font-medium border rounded-full group peer-checked:bg-black peer-checked:text-white">
                             {size}
                           </span>
                         </label>
@@ -220,7 +217,7 @@ const ProductDetails = ({ product, products }) => {
                   </div>
                 </fieldset>
 
-                <div class="flex mt-8">
+                <div className="flex mt-8">
                   <div>
                     <label htmlFor="quantity" className="sr-only">
                       Qty
@@ -252,7 +249,7 @@ const ProductDetails = ({ product, products }) => {
 
                   <button
                     type="submit"
-                    class="block px-5 py-3 ml-3 text-xs font-medium text-white bg-green-600 rounded hover:bg-green-500"
+                    className="block px-5 py-3 ml-3 text-xs font-medium text-white bg-green-600 rounded hover:bg-green-500"
                   >
                     Add to Cart
                   </button>
@@ -264,9 +261,7 @@ const ProductDetails = ({ product, products }) => {
       </section>
       <div>
         <h2 className="text-2xl font-bold text-center">You may also like</h2>
-        <div className="flex justify-center">
-          
-        </div>
+        <div className="flex justify-center"></div>
       </div>
     </div>
   );
@@ -293,7 +288,7 @@ export const getStaticPaths = async () => {
     fallback: "blocking",
   };
 };
-
+// Quering product data and also INCLUDING the category name
 export const getStaticProps = async ({ params: { slug } }) => {
   const query = `*[_type == "product" && slug.current == '${slug}'][0]`;
   const productsQuery = '*[_type == "product"]';

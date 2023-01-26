@@ -1,8 +1,15 @@
 // import Swiper core and required modules
-import { Navigation, Pagination, Scrollbar, A11y, Autoplay, EffectCreative } from "swiper";
+import {
+  Navigation,
+  Pagination,
+  Scrollbar,
+  A11y,
+  Autoplay,
+  EffectCreative,
+} from "swiper";
 
-
-
+import { client } from "../lib/client";
+import { urlFor } from "../lib/client";
 
 import Image from "next/image";
 import Header from "../components/Header";
@@ -14,25 +21,40 @@ import PromoSection from "../components/PromoSection";
 import ProductList from "../components/ProductList";
 import ProductPage from "../components/ProductPage";
 
-const swipper = () => {
+const swipper = ({ products }) => {
+  console.log(products)
   return (
     <div className="">
-      <Announcement/>
+      <Announcement />
 
       <div class="bg-white text-gray-600 work-sans leading-normal text-base tracking-normal space-y-9">
         <Header />
-        
-        
-          <Swipper />
 
-          <ProductList  />
-          <PromoSection />
-          <Categories />
-          {/* <ProductPage /> */}
-          <Footer />
+        {/* <Image 
+        src={urlFor(products.images[0])} 
+        alt="product" /> */}
+        <Swipper />
+
+        <ProductList products={products} />
+        <PromoSection />
+        <Categories />
+        {/* <ProductPage /> */}
+        <Footer />
       </div>
     </div>
   );
+};
+
+export const getServerSideProps = async () => {
+  const query = '*[_type == "product"]';
+  const products = await client.fetch(query);
+
+  // const bannerQuery = '*[_type == "banner"]';
+  // const bannerData = await client.fetch(bannerQuery);
+
+  return {
+    props: { products },
+  };
 };
 
 export default swipper;

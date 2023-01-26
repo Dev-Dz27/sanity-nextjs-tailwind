@@ -1,4 +1,4 @@
-import { defineType, defineField } from 'sanity';
+import {defineType, defineField} from 'sanity'
 export default defineType({
   name: 'product',
   title: 'Product',
@@ -7,7 +7,7 @@ export default defineType({
     defineField({
       name: 'name',
       title: 'Name',
-      type: 'string'
+      type: 'string',
     }),
     defineField({
       name: 'slug',
@@ -15,42 +15,42 @@ export default defineType({
       type: 'slug',
       options: {
         source: 'name',
-        maxLength: 96
-      }
+        maxLength: 96,
+      },
     }),
     defineField({
       name: 'description',
       title: 'Description',
-      type: 'blockContent'
+      type: 'string',
     }),
     defineField({
       name: 'price',
       title: 'Price',
       type: 'number',
-      validation: Rule => Rule.min(0)
+      validation: (Rule) => Rule.min(0),
     }),
     defineField({
       name: 'sku',
       title: 'SKU',
-      type: 'string'
+      type: 'string',
     }),
     defineField({
       name: 'colors',
       title: 'Colors',
       type: 'array',
-      of: [{ type: 'string' }],
+      of: [{type: 'string'}],
     }),
     defineField({
       name: 'sizes',
       title: 'Sizes',
       type: 'array',
-      of: [{ type: 'string' }],
+      of: [{type: 'string'}],
     }),
     defineField({
       name: 'images',
       title: 'Images',
       type: 'array',
-      of: [{ type: 'image' }]
+      of: [{type: 'image'}],
     }),
     defineField({
       name: 'image',
@@ -64,18 +64,18 @@ export default defineType({
       name: 'categories',
       title: 'Categories',
       type: 'array',
-      of: [{ type: 'reference', to: { type: 'category' } }]
+      of: [{type: 'reference', to: {type: 'category'}, fetch: true}],
     }),
     defineField({
       name: 'publishedAt',
       title: 'Published at',
-      type: 'datetime'
-    })
+      type: 'datetime',
+    }),
   ],
   preview: {
     select: {
       title: 'name',
-      media: 'images.0'
-    }
-  }
-});
+      media: 'images.0',
+    },
+  },
+})
