@@ -5,7 +5,7 @@ import { urlFor } from "../lib/client";
 import Product from "../components/Product";
 import Carousel from "../components/Carousel";
 import Image from "next/image";
-import {Footer, PromoSection, ProductCollection} from "../components";
+import {Footer, PromoSection, ProductCollection, ProductList} from "../components";
 import Link from "next/link";
 export default function Home({ products }) {
   return (
@@ -21,13 +21,13 @@ export default function Home({ products }) {
           Best Selling / Hot Sale / NEW ARRIVALS{" "}
         </h2>
       </div>
-      <ProductCollection products={products} />
-      
-      <div className="products-container">
-        {/* {products?.map((product) => <Product key={product._id} product={product} />)} */}
-      </div>
+      {/* <ProductCollection products={products} /> */}
+      <h2 className="text-2xl font-bold tracking-tight text-gray-900 text-center ">
+        NEW ARRIVALS
+      </h2>
+      <ProductList products={products} />
       <Link href={`/product/${products[0]?.slug.current}`}>Go to Product {products[0]?.slug.current} </Link>
-      <img src={urlFor(products[0].image )} alt="" />
+      {/* <img src={urlFor(products[0].image )} alt="" /> */}
       {console.log(products[0].images)}
 
       

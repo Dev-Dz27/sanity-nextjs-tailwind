@@ -11,12 +11,12 @@ const ProductSwape = ({product}) => {
         
         <Link href={`/product/${product.slug.current}`} class="block overflow-hidden group">
           <div
-            class="relative h-[350px] sm:h-[450px]">
+            class="relative h-[280px] sm:h-[280px] ">
 
               <img
               src={urlFor(images[0])}    
               alt="product"
-              class="absolute inset-0 object-cover w-full h-full opacity-100 group-hover:opacity-0 transition"
+              class=" absolute inset-0 object-cover w-full h-full opacity-100 group-hover:opacity-0 transition"
               />
               <img
               src={urlFor(images[1])}    

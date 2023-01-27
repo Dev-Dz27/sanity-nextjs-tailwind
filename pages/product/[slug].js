@@ -3,8 +3,9 @@ import { client, urlFor } from "../../lib/client";
 import ProductPage from "../../components/ProductPage";
 import ProductPage2 from "../../components/ProductPage2";
 import SwipperThumbs from "../../components/SwipperThumbs";
+import { ProductList } from "../../components";
 
-const ProductDetails = ({ product }) => {
+const ProductDetails = ({ product, products }) => {
   const { images, name, details, price } = product;
   const [index, setIndex] = useState(0);
 
@@ -14,6 +15,8 @@ const ProductDetails = ({ product }) => {
       <ProductPage product={product} />
       {/* <ProductPage2 products={products}/> */}
       {/* <SwipperThumbs product={product}/> */}
+      <ProductList products={products} />
+
     </div>
   );
 };
@@ -28,9 +31,9 @@ export const getStaticPaths = async () => {
     }
     `;
 
-  const products = await client.fetch(query);
+  const thproducts = await client.fetch(query);
 
-  const paths = products.map((product) => ({
+  const paths = thproducts.map((product) => ({
     params: {
       slug: product.slug.current,
     },
@@ -47,11 +50,13 @@ export const getStaticProps = async ({ params: { slug } }) => {
     ...,
     categories[]->{name}
   }`;
+  const querys = '*[_type == "product"]';
   const product = await client.fetch(query);
+  const products = await client.fetch(querys);
 
   // console.log(product);
   return {
-    props: { product },
+    props: { product, products },
   };
 };
 

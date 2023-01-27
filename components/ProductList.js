@@ -27,9 +27,7 @@ const ProductList = ({products}) => {
   
   return (
     <>
-    <div className="flex items-center justify-center space-x-4">
-
-    
+    <div className="flex items-center justify-center space-x-4 mb-4">
       <div className="prev">
         <button
           className="hidden hover:text-gray-500 sm:block sm:rounded sm:text-gray-700 sm:transition"
@@ -49,9 +47,7 @@ const ProductList = ({products}) => {
           </svg>
         </button>
       </div>
-      <h2 className="text-2xl font-bold tracking-tight text-gray-900 text-center ">
-        NEW ARRIVALS
-      </h2>
+
 
       <div className="next">
         <button
@@ -84,28 +80,37 @@ const ProductList = ({products}) => {
           Autoplay,
           EffectCreative,
         ]}
-        spaceBetween={10}
-        slidesPerView={3}
+        slidesPerView={4}
+        spaceBetween={20}
+        // BreakPoints
+        // breakpoints={{
+        //   320: {
+        //     slidesPerView: 3,
+        //     spaceBetween: 10,
+        //   },
+        //   480: {
+        //     slidesPerView: 3,
+        //     spaceBetween: 10,
+        //   },
+        //   640: {
+        //     slidesPerView: 5,
+        //     spaceBetween: 10,
+        //   },
+          
+        // }}
+        // BreakPoints
+
         navigation={{
           prevEl: ".prev",
           nextEl: ".next",
         }}
         loop={true}
         autoplay={false}
-        // autoplay={{
-        //   delay: 5000,
-        //   disableOnInteraction: false,
-        // }}
-        // pagination={{ clickable: true }}
-        // scrollbar={{ draggable: true }}
-        // onSwiper={() =>{}}
-        // onSlideChange={() => console.log("slide change")}
         speed={1000}
         className="relative"
       >
         <div className="bg-white">
           <div className="">
-            {/* <h2 className="text-2xl font-bold tracking-tight text-gray-900 text-center">NEW ARRIVALS</h2> */}
               <div className="">
                 {products.map((product) => (
                     <div key={product.id} className="  ">
