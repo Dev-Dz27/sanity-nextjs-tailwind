@@ -7,7 +7,9 @@ import Carousel from "../components/Carousel";
 import Image from "next/image";
 import {Footer, PromoSection, ProductCollection, ProductList} from "../components";
 import Link from "next/link";
-export default function Home({ products }) {
+import Categories from "../components/Categories";
+export default function Home({ products, categories }) {
+  console.log(categories);
   return (
     <div className="">
       <Head>
@@ -25,24 +27,25 @@ export default function Home({ products }) {
       <h2 className="text-2xl font-bold tracking-tight text-gray-900 text-center ">
         NEW ARRIVALS
       </h2>
-      <ProductList products={products} />
+      {/* <ProductList products={products} /> */}
       <Link href={`/product/${products[0]?.slug.current}`}>Go to Product {products[0]?.slug.current} </Link>
-      {/* <img src={urlFor(products[0].image )} alt="" /> */}
-      {console.log(products[0].images)}
 
-      
+
+      <Categories categories={categories}  />
     </div>
   );
 }
 
 export const getServerSideProps = async () => {
   const query = '*[_type == "product"]';
+  const query1 = '*[_type == "category"]';
   const products = await client.fetch(query);
+  const categories = await client.fetch(query1);
 
   // const bannerQuery = '*[_type == "banner"]';
   // const bannerData = await client.fetch(bannerQuery);
 
   return {
-    props: { products },
+    props: { products, categories },
   };
 };
