@@ -22,7 +22,7 @@ const Categories = ({categories}) => {
     <ul class="grid grid-cols-1 gap-4 mt-8 lg:grid-cols-3">
      
       
-       {categories.map((category, i) => (
+       {categories?.map((category, i) => (
          <li key={i}>
         <a href="#" class="relative block group">
           <img
