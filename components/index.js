@@ -9,3 +9,4 @@ export { default as ProductList } from './ProductList';
 export { default as ProductSwape } from './ProductSwape';
 export { default as PromoSection } from './PromoSection';
 export { default as Swipper } from './Swipper';
+export { default as Cart } from './Cart';

@@ -3,45 +3,40 @@ import React, { useState } from "react";
 
 import { client, urlFor } from "../lib/client";
 // import { Product } from '../../components';
-// import { useStateContext } from '../../context/StateContext';
+import { useStateContext } from "../context/StateContext";
 
 const ProductDetails = ({ product, products }) => {
-  console.log(product.categories)
-  const { images, sizes, colors, name, details, price, description, categories } = product;
-  const [index, setIndex] = useState(0);
-  const { decQty, incQty, qty, onAdd, setShowCart } = useState(1);
-
-  const handleBuyNow = () => {
-    onAdd(product, qty);
-
-    setShowCart(true);
-  };
+  console.log(product.categories);
+  const {
+    images,
+    sizes,
+    colors,
+    name,
+    details,
+    price,
+    description,
+    categories,
+  } = product;
 
   // slice
   const imagesWithoutFirst = images.slice(1);
   // quantity
   const [quantity, setQuantity] = useState(1);
+  const [index, setIndex] = useState(0);
+  const { decQty, incQty, qty, onAdd, setShowCart } = useStateContext();
 
-  const handleIncrement = (e) => {
-    e.preventDefault();
-    setQuantity((prevQuantity) => prevQuantity + 1);
-  };
+  const handleBuyNow = () => {
+    onAdd(product, qty);
 
-  const handleDecrement = (e) => {
-    e.preventDefault();
-    if (quantity > 1) {
-      setQuantity((prevQuantity) => prevQuantity - 1);
-    }
-  };
+    setShowCart(true);
+  }
 
-  // type the amount logic
-  const handleChange = (e) => {
-    let value = e.target.value;
-    //validating the value
-    if (value < 1) value = 1;
-    setQuantity(value);
-  };
 
+
+  // prevents the page from refreshing
+  // function handleSubmit(event) {
+  //   event.preventDefault(); 
+  // }
   return (
     <div>
       <section>
@@ -160,7 +155,9 @@ const ProductDetails = ({ product, products }) => {
                 </div>
               </details> */}
 
-              <form className="mt-8">
+              <div className="mt-8" 
+              // onSubmit={handleSubmit}
+              >
                 <fieldset>
                   <legend className="mb-1 text-sm font-medium">Color</legend>
 
@@ -225,21 +222,20 @@ const ProductDetails = ({ product, products }) => {
                     <div className="flex items-center">
                       <button
                         type="button"
-                        onClick={handleDecrement}
+                        onClick={decQty}
                         className="bg-gray-300 text-gray-700 rounded-l px-3 py-2"
                       >
                         -
                       </button>
-                      <input
-                        type="text"
+                      <span
                         id="quantity"
                         className="w-12 rounded border-gray-200 py-3 text-center text-xs [-moz-appearance:_textfield] &::-webkit-outer-spin-button:m-0 &::-webkit-outer-spin-button:appearance-none &::-webkit-inner-spin-button:m-0 &::-webkit-inner-spin-button:appearance-none"
-                        value={quantity}
-                        onChange={handleChange}
-                      />
+                      >
+                        {qty}
+                      </span>
                       <button
                         type="button"
-                        onClick={handleIncrement}
+                        onClick={incQty}
                         className="bg-gray-300 text-gray-700 rounded-r px-3 py-2"
                       >
                         +
@@ -250,11 +246,13 @@ const ProductDetails = ({ product, products }) => {
                   <button
                     type="submit"
                     className="block px-5 py-3 ml-3 text-xs font-medium text-white bg-green-600 rounded hover:bg-green-500"
+                    // when adding get the product and the quantity of it
+                    onClick={() => onAdd(product, qty)}
                   >
                     Add to Cart
                   </button>
                 </div>
-              </form>
+              </div>
             </div>
           </div>
         </div>

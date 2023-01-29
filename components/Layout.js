@@ -10,15 +10,16 @@ const Layout = ({ children }) => {
       <Head>
         <title>Demo Store</title>
       </Head>
+      
       <header>
-        {/* <Header /> */}
+        <Header />
       </header>
       <main className="">
-        {/* {children} */}
+        {children}
       </main>
-      <footer>
-        {/* <Footer /> */}
-      </footer>
+      {/* <footer>
+        <Footer />
+      </footer> */}
     </div>
   )
 }
